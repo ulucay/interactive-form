@@ -38,34 +38,32 @@ $('#design').change(() => {
 });
 
 
+let totalCost = 0;
 
 $('.activities').append(`<span id='totalCost'></span>`);
 
-let totalCost = 0;
-
 $('.activities').on('change', (event) => {
 
-  let cost;
-
-  const regexTime = /—([\w-\d ]+),/;
-  const regexCost = /\$(\d+)$/;
-  
   const $checkedActivity = $(event.target);
   const $checkedActivityText = $($checkedActivity).parent().text();
 
-  regexTime.exec($checkedActivityText);
-  const matchedTime = RegExp.$1;
 
-  regexCost.exec($checkedActivityText);
-  const checkedCost = RegExp.$1;
+  const index$ = $checkedActivityText.indexOf('$');
+  const costOfActivity = parseInt($checkedActivityText.slice('-3'));
 
-  console.log(checkedCost);
 
-  console.log(matchedTime);
+  if($checkedActivity.prop('checked')){
+    totalCost += costOfActivity;
+    $('#totalCost').text("Total: " + totalCost);
+  }
+  else{
+    totalCost -= costOfActivity;
+    $('#totalCost').text("Total: " + totalCost);
+  }
 
-  $('.activities label').each((index,element) => {
-    console.log($(element).text());
-  })
+  
+  
+  
 
 
 })
