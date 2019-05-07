@@ -39,124 +39,37 @@ $('#design').change(() => {
 
 
 
-$('.activities').append(`<p id='totalCost'></p>`);
+$('.activities').append(`<span id='totalCost'></span>`);
 
 let totalCost = 0;
 
-$('.activities').on('change', (e) => {
+$('.activities').on('change', (event) => {
 
-  let cost = 0;
+  let cost;
+
+  const regexTime = /—([\w-\d ]+),/;
+  const regexCost = /\$(\d+)$/;
+  
+  const $checkedActivity = $(event.target);
+  const $checkedActivityText = $($checkedActivity).parent().text();
+
+  regexTime.exec($checkedActivityText);
+  const matchedTime = RegExp.$1;
+
+  regexCost.exec($checkedActivityText);
+  const checkedCost = RegExp.$1;
+
+  console.log(checkedCost);
+
+  console.log(matchedTime);
+
+  $('.activities label').each((index,element) => {
+    console.log($(element).text());
+  })
 
 
 })
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* //Register for Activities section - Check Handler
-const jsFrameworksChecked = () => {
-  if($('[name="js-frameworks"]').is(":checked")){
-    $('[name="express"]').prop("disabled", true);
-    $('[name="build-tools"]').prop("disabled", true);
-  }
-  else{
-    $('[name="express"]').prop("disabled", false);
-    $('[name="build-tools"]').prop("disabled", false);
-  }
-}
-
-const expressChecked = () => {
-  if($('[name="express"]').is(":checked")){
-    $('[name="js-frameworks"]').prop("disabled", true);
-    $('[name="build-tools"]').prop("disabled", true);
-  }
-  else{
-    $('[name="js-frameworks"]').prop("disabled", false);
-    $('[name="build-tools"]').prop("disabled", false);
-  }
-}
-
-const buildToolsChecked = () => {
-  if($('[name="build-tools"]').is(":checked")){
-    $('[name="js-frameworks"]').prop("disabled", true);
-    $('[name="express"]').prop("disabled", true);
-  }
-  else{
-    $('[name="js-frameworks"]').prop("disabled", false);
-    $('[name="express"]').prop("disabled", false);
-  }
-}
-
-const jsLibsChecked = () => {
-  if($('[name="js-libs"]').is(":checked")){
-    $('[name="node"]').prop("disabled", true);
-    $('[name="npm"]').prop("disabled", true);
-  }
-  else{
-    $('[name="node"]').prop("disabled", false);
-    $('[name="npm"]').prop("disabled", false);
-  }
-}
-
-const npmChecked = () => {
-  if($('[name="npm"]').is(":checked")){
-    $('[name="js-libs"]').prop("disabled", true);
-    $('[name="node"]').prop("disabled", true);
-  }
-  else{
-    $('[name="npm"]').prop("disabled", false);
-    $('[name="node"]').prop("disabled", false);
-  }
-}
-
-const nodeChecked = () => {
-  if($('[name="node"]').is(":checked")){
-    $('[name="js-libs"]').prop("disabled", true);
-    $('[name="npm"]').prop("disabled", true);
-  }
-  else{
-    $('[name="js-libs"]').prop("disabled", false);
-    $('[name="npm"]').prop("disabled", false);
-  }
-}
-
-
-//Register for Activities section
-$('.activities').change(()=>{
-  
-  jsFrameworksChecked();
-  expressChecked();
-  buildToolsChecked();
-  jsLibsChecked();
-  nodeChecked();
-  npmChecked();
-
-
-});
-
- */
 
