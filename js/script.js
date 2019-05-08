@@ -91,6 +91,9 @@ $('.activities').on('change', (event) => {
 Payment info section
 */
 
+//Hides the select payment option text
+$('#payment option:first').prop('hidden', true);
+
 const $creditCardDiv = $('#credit-card');
 //Credit card option selected as default
 $('option[value="credit card"]').prop('selected', true);
@@ -132,6 +135,7 @@ const validName = () => {
   }
   else{
     $name.css('borderColor','red');
+    event.preventDefault();
     return false ;
   }
 }
@@ -146,6 +150,7 @@ const validEmail = () => {
   }
   else{
     $email.css( 'borderColor','red');
+    event.preventDefault();
     return false;
   }
 }
@@ -163,6 +168,7 @@ const validActivity = () => {
     if($('#activityError').length < 1)
     //Adds the error message if condition is false
       $activity.append(`<span id="activityError" style='float:left; font-size:20px; color:red;'> Please select activities</span>`);
+      event.preventDefault();
       return false;
   }
 }
@@ -177,6 +183,7 @@ const validCreditCard = () => {
   }
   else{
     $cardNum.css( 'borderColor','red');
+    event.preventDefault();
     return false;
   }
 }
@@ -191,6 +198,7 @@ const validZipCode = () => {
   }
   else{
     $zipCode.css('borderColor','red');
+    event.preventDefault();
     return false;
   }
 }
@@ -205,6 +213,7 @@ const validCVV = () => {
   }
   else{
     $cvv.css('borderColor','red');
+    event.preventDefault();
     return false;
   }
 }
@@ -245,7 +254,7 @@ const validate = () => {
   }
   
   //Checks the validation values
-  for(validation of validationResults){
+  for(const validation of validationResults){
     if(validation == false){
       return false;
     }
