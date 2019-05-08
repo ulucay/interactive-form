@@ -92,7 +92,10 @@ Payment info section
 */
 
 const $creditCardDiv = $('#credit-card');
-
+//Credit card option selected as default
+$('option[value="credit card"]').prop('selected', true);
+$creditCardDiv.next().hide();
+$creditCardDiv.next().next().hide();
 //Checks the selected payment value and hide the rests
 $('#payment').on('change', () => {
   const $selectedPayment = $('#payment :selected').val();
