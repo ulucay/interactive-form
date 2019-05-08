@@ -45,7 +45,7 @@ $('#design').change(() => {
 
 let totalCost = 0;
 
-$('.activities').append(`<span id='totalCost'></span>`);
+$('.activities').append(`<span id='totalCost' style='float:right; font-size:26px;'></span>`);
 
 $('.activities').on('change', (event) => {
   //Variables of check activity
@@ -123,7 +123,7 @@ Form Validators
 const validName = () => {
   const $name = $('#name');
 
-  if($name.val().length > 0 && /^[A-Za-z\s]+$/.test($name)){
+  if($name.val().length > 0 && /^[A-Za-z\s]+$/.test($name.val())){
     $name.css('borderColor' , '#c1deeb');
     return true;
   }
@@ -152,11 +152,15 @@ const validActivity = () => {
   $activity = $('.activities');
 
   if($('input[type="checkbox"]:checked').length > 0){
+    //Removes the error message if condition is true
+    $('#activityError').remove();
     return true;
   }
   else{
-    $activity.append(`<span id="activityError">Please select activities</span>`);
-    return false;
+    if($('#activityError').length < 1)
+    //Adds the error message if condition is false
+      $activity.append(`<span id="activityError" style='float:left; font-size:20px; color:red;'> Please select activities</span>`);
+      return false;
   }
 }
 
@@ -164,7 +168,7 @@ const validActivity = () => {
 const validCreditCard = () => {
   const $cardNum = $('#cc-num');
 
-  if(/^\d{13,16}$/.test($cardNum)){
+  if(/^\d{13,16}$/.test($cardNum.val())){
     $cardNum.css('borderColor','#c1deeb');
     return true;
   }
@@ -178,7 +182,7 @@ const validCreditCard = () => {
 const validZipCode = () => {
   const $zipCode = $('#zip');
 
-  if(/^\d{5}$/.test($zipCode)){
+  if(/^\d{5}$/.test($zipCode.val())){
     $zipCode.css('borderColor','#c1deeb');
     return true;
   }
@@ -192,7 +196,7 @@ const validZipCode = () => {
 const validCVV = () => {
   const $cvv = $('#cvv');
   
-  if(/^\d{3}$/.test($cvv)){
+  if(/^\d{3}$/.test($cvv.val())){
     $cvv.css('borderColor','#c1deeb');
     return true;
   }
@@ -207,8 +211,24 @@ Realtime validations
 */
 
 //Name validation
-$('#name').on('keyup', () =>{
+$('#name').on('keyup', () => {
   validName();
+})
+//Mail validation
+$('#mail').on('keyup', () => {
+  validEmail();
+})
+//Creditcard validation
+$('#cc-num').on('keyup', () =>{
+  validCreditCard();
+});
+//CVV validation
+$('#cvv').on('keyup', () => {
+  validCVV();
+});
+//Zipcode validation
+$('#zip').on('keyup', () => {
+  validZipCode();
 });
 
 
