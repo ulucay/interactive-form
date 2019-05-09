@@ -126,8 +126,7 @@ $('#payment').on('change', () => {
 
 
 //Error Messages
-
-/* const nameError = `<span id='name-error' style='color:red'> Please enter a valid name</span>`;
+const nameError = `<span id='name-error' style='color:red'> Please enter a valid name</span>`;
 $(nameError).insertAfter('#name');
 $('#name-error').hide();
 
@@ -135,13 +134,10 @@ const emailError = `<span id='email-error' style='color:red'> Please enter a val
 $(emailError).insertAfter('#mail');
 $('#email-error').hide();
 
-const activityError = `<span id='activity-error' style='color:red'> Please select at least one activity</span>`;
-$(activityError).insertAfter('.activities legend');
+const activityError = `<span id='activity-error' style='color:red;'> Please select at least one activity</span>`;
+$(activityError).insertAfter('.activities');
 $('#activity-error').hide();
 
-const creditError = `<span id='credit-error' style='color:red'> Please select enter a valid credit card number</span>`;
-$(creditError).insertAfter('#cc-num');
-$('#credit-error').hide(); */
 
 
 /*
@@ -154,10 +150,13 @@ const validName = () => {
 
   if($name.val().length > 0 && /^[A-Za-z\s]+$/.test($name.val())){
     $name.css('borderColor' , '#c1deeb');
+    $('#name-error').hide();
     return true;
   }
   else{
     $name.css('borderColor','red');
+    $('#name-error').show();
+    $('label[for="mail"]').css('margin-top','20px');
     event.preventDefault();
     return false ;
   }
@@ -169,10 +168,13 @@ const validEmail = () => {
 
   if(/\S+@\S+\.\S+/.test($email.val())){
     $email.css('borderColor','#c1deeb');
+    $('#email-error').hide();
     return true;
   }
   else{
     $email.css( 'borderColor','red');
+    $('#email-error').show();
+    $('label[for="title"]').css('margin-top','20px');
     event.preventDefault();
     return false;
   }
@@ -184,12 +186,12 @@ const validActivity = () => {
 
   if($('input[type="checkbox"]:checked').length > 0){
     //Removes the error message if condition is true
-    $('#activityError').remove();
+    $('#activity-error').hide();
     return true;
   }
   else{
     //Adds the error message if condition is false
-    $activity.append(`<span id="activityError" style='float:left; font-size:20px; color:red;'> Please select activities</span>`);
+    $('#activity-error').show();
     event.preventDefault();
     return false;
   }
