@@ -25,6 +25,10 @@ $('#design').change(() => {
   $("#colors-js-puns").show();
   //Resets the options
   $("#color option").show();
+  //Hides the color selection if design is 'Select Theme'
+  if($('#design option:selected').text() == 'Select Theme'){
+    $("#colors-js-puns").hide();
+  }
   //Shows the options according to selected design
   if(designValue == 'js puns'){
     $("#color option[value='tomato']").hide();
@@ -121,6 +125,25 @@ $('#payment').on('change', () => {
 })
 
 
+//Error Messages
+
+/* const nameError = `<span id='name-error' style='color:red'> Please enter a valid name</span>`;
+$(nameError).insertAfter('#name');
+$('#name-error').hide();
+
+const emailError = `<span id='email-error' style='color:red'> Please enter a valid email</span>`;
+$(emailError).insertAfter('#mail');
+$('#email-error').hide();
+
+const activityError = `<span id='activity-error' style='color:red'> Please select at least one activity</span>`;
+$(activityError).insertAfter('.activities legend');
+$('#activity-error').hide();
+
+const creditError = `<span id='credit-error' style='color:red'> Please select enter a valid credit card number</span>`;
+$(creditError).insertAfter('#cc-num');
+$('#credit-error').hide(); */
+
+
 /*
 Form Validators
 */
@@ -165,13 +188,13 @@ const validActivity = () => {
     return true;
   }
   else{
-    if($('#activityError').length < 1)
     //Adds the error message if condition is false
-      $activity.append(`<span id="activityError" style='float:left; font-size:20px; color:red;'> Please select activities</span>`);
-      event.preventDefault();
-      return false;
+    $activity.append(`<span id="activityError" style='float:left; font-size:20px; color:red;'> Please select activities</span>`);
+    event.preventDefault();
+    return false;
   }
 }
+
 
 //Credit card Validation
 const validCreditCard = () => {
